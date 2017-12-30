@@ -1,5 +1,6 @@
-var points;
-var moves;
+var points = 0;
+var attempts = 4;
+var moves = 0;
 
 /*
  * Display the cards on the page
@@ -71,7 +72,6 @@ $('.card').on('click', function () {
 
     if (click == 1) {
         previousClicked = $(this);
-
     }
 
     if (click == 2) {
@@ -80,22 +80,42 @@ $('.card').on('click', function () {
         var clickedObject = $(this).find('i').attr('class');
 
         var previousClickedObject = previousClicked.find('i').attr('class');
-        if (clickedObject == previousClickedObject) {
-
+        if (clickedObject === previousClickedObject) {
+            points++;
+            console.log("Match");
         } else {
             setTimeout(function () {
                 $(previousClicked).removeClass('match');
                 $(clicked).removeClass('match');
             }, 1000);
+
+            if (moves === 4) {
+                removeStar();
+            } else if (moves === 7) {
+                removeStar();
+            } else if (moves === 10) {
+                removeStar();
+            }
+            updateMoves();
         }
     }
 });
+
+function updateMoves() {
+    moves++;
+    $('.moves').text(moves);
+}
+
+function removeStar() {
+    attempts--;
+    $("#star-" + attempts).removeClass("fa-star");
+    $("#star-" + attempts).addClass("fa-star-o");
+}
 
 function restart() {
     click = 0;
     previousClicked = null;
 
-    $('.card').removeClass('match');
     reshuffle();
 }
 

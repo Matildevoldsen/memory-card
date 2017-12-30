@@ -9,32 +9,42 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-
-    <div class="container">
-        <header>
-            <h1>Matching Game</h1>
-        </header>
-
-        <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
-
-        	<span class="moves">3</span> Moves
-
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
-        </section>
-
-        <ul class="deck" id="card-container">
-
-        </ul>
+<div class="modal__overlay hidden" id="lost">
+    <div class="modal">
+        <div class="modal__content">
+            <p>Game over. Want to try again?</p>
+        </div>
+        <div class="modal__footer">
+            <button>Replay</button>
+        </div>
     </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/app.js"></script>
+<div class="container">
+    <header>
+        <h1>Matching Game</h1>
+    </header>
+
+    <section class="score-panel">
+        <ul class="stars">
+            <li><i class="fa fa-star" id="star-1"></i></li>
+            <li><i class="fa fa-star" id="star-2"></i></li>
+            <li><i class="fa fa-star" id="star-3"></i></li>
+        </ul>
+
+        <span class="moves">0</span> Moves
+
+        <div class="restart">
+            <i class="fa fa-repeat"></i>
+        </div>
+    </section>
+
+    <ul class="deck" id="card-container">
+
+    </ul>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

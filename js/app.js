@@ -124,7 +124,9 @@ $('.card').on('click', function () {
             points++;
 
             if (points === 8) {
-
+                $('#won').show();
+                $('#won').css('display', 'flex');
+                $('#won').css('display', '-webkit-flex');
             }
         } else {
             //Ensuring the cards will appear for a short while, afterwards disappear

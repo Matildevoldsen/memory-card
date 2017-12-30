@@ -1,13 +1,13 @@
 var points = 0;
 var attempts = 4;
 var moves = 0;
+var stars = 3;
 
 var sec = 0;
-function pad ( val ) { return val > 9 ? val : "0" + val; }
-setInterval( function(){
-    $(".seconds").html(pad(++sec%60));
-    $(".minutes").html(pad(parseInt(sec/60,10)));
-}, 1000);
+var seconds;
+var minutes;
+
+var startTimerVar;
 
 const cardContainer = document.getElementById("card-container");
 
@@ -67,11 +67,17 @@ $('.restart').on('click', function () {
 });
 
 $('.replay').on('click', function () {
-   restart();
+    $('#won').addClass('hidden');
+    restart();
 });
 
 function restart() {
     click = 0;
+    seconds = 0;
+    minutes = 0;
+    clearInterval(startTimerVar);
+    $('.minutes').innerHTML = "";
+    $('.seconds').innerHTML = "";
     attempts = 4;
     moves = 0;
     $('.moves').text("0");
@@ -97,6 +103,8 @@ $('.card').on('click', function () {
     //Click Functionality. It ensures only two cards open.
     ++click;
 
+    starTimer();
+
     //To make sure it'll be resetted if no cards is matched.
     if (points === 0 && clicked === 2) {
         $('.card').removeClass('match');
@@ -120,13 +128,13 @@ $('.card').on('click', function () {
         //Setting the previous clicked card object.
         var previousClickedObject = previousClicked.find('i').attr('class');
         //Checking if clickedObject equals previousClickedObject. If true it'll be a match.
-        if (clickedObject === previousClickedObject) {
+        console.log(clicked.id);
+        console.log(previousClicked.prop("id"));
+        if (clickedObject === previousClickedObject && clicked.id !== previousClicked.prop("id")) {
             points++;
 
             if (points === 8) {
-                $('#won').show();
-                $('#won').css('display', 'flex');
-                $('#won').css('display', '-webkit-flex');
+                won();
             }
         } else {
             //Ensuring the cards will appear for a short while, afterwards disappear
@@ -137,14 +145,20 @@ $('.card').on('click', function () {
                 removeStar();
             } else if (moves === 7) {
                 removeStar();
-            } else if (moves === 10) {
-                removeStar();
             }
             //Update moves.
             updateMoves();
         }
     }
 });
+
+function won() {
+    $('#won').show();
+    $('#won').css('display', 'flex');
+    $('#won').css('display', '-webkit-flex');
+    $('#winner-text').text("Congrats! You won the game. It took you: " + minutes + "m " + seconds + "s. You got " + stars + " stars.");
+
+}
 
 function closeCards(clicked) {
     setTimeout(function () {
@@ -160,6 +174,20 @@ function updateMoves() {
 
 function removeStar() {
     attempts--;
+    stars--;
     $("#star-" + attempts).removeClass("fa-star");
     $("#star-" + attempts).addClass("fa-star-o");
+}
+
+function starTimer() {
+    startTimerVar = setInterval(function () {
+        seconds = pad(++sec % 60);
+        minutes = pad(parseInt(sec / 60, 10));
+        $(".seconds").html(seconds);
+        $(".minutes").html(minutes);
+    }, 1000);
+}
+
+function pad(val) {
+    return val > 9 ? val : "0" + val;
 }

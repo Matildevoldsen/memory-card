@@ -1,20 +1,20 @@
 # Memory Game Project
-
+Memory game made with jQuery and CSS.
 ## Table of Contents
 
 * [Instructions](#instructions)
+* [Installation](#installation)
 * [Contributing](#contributing)
 
 ## Instructions
+Click on two matching card to get a match. When all cards is matched there'll be displayed a congrats. 
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Click the restart button to restart the game.
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+The stars shows how well you played. The star rating can never reach 0.
+## Installation
+Download all the files and put it into your desired file location. Then right click the index.html file and open with your preferred browser.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+Please use comments and commits that clearly describes the purpose of the code you contribute. All contributions should follow the Udacity style guide's.

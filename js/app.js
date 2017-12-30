@@ -1,6 +1,5 @@
 var points;
 var moves;
-var clicked = [];
 
 /*
  * Display the cards on the page
@@ -59,8 +58,6 @@ function printCards(cards) {
 
         cardContainer.appendChild(cardEl);
     }
-
-
 }
 
 shuffle(cards);
@@ -84,7 +81,7 @@ $('.card').on('click', function () {
 
         var previousClickedObject = previousClicked.find('i').attr('class');
         if (clickedObject == previousClickedObject) {
-            alert('Match!!!!');
+
         } else {
             setTimeout(function () {
                 $(previousClicked).removeClass('match');
@@ -93,6 +90,23 @@ $('.card').on('click', function () {
         }
     }
 });
+
+function restart() {
+    click = 0;
+    previousClicked = null;
+
+    $('.card').removeClass('match');
+    reshuffle();
+}
+
+function reshuffle() {
+    cardContainer.innerHTML = "";
+    shuffle(cards);
+}
+
+$('.restart').on('click', function () {
+    restart();
+})
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

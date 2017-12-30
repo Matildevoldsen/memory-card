@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-<div class="modal__overlay hidden" id="lost">
+<div class="modal__overlay hidden" id="won">
     <div class="modal">
         <div class="modal__content">
-            <p>Game over. Want to try again?</p>
+            <p>Congrats! You won. It took you <span class="minutes"></span>:<span class="seconds"></span> </p>
         </div>
         <div class="modal__footer">
-            <button>Replay</button>
+            <button class="replay">Replay</button>
         </div>
     </div>
 </div>
@@ -42,6 +42,9 @@
     <ul class="deck" id="card-container">
 
     </ul>
+    <div class="timer">
+        <span class="minutes"></span>:<span class="seconds"></span>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

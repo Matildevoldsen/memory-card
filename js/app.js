@@ -2,14 +2,13 @@ var points = 0;
 var attempts = 4;
 var moves = 0;
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+var sec = 0;
+function pad ( val ) { return val > 9 ? val : "0" + val; }
+setInterval( function(){
+    $(".seconds").html(pad(++sec%60));
+    $(".minutes").html(pad(parseInt(sec/60,10)));
+}, 1000);
 
-// Shuffle function from http://stackoverflow.com/a/2450976
 const cardContainer = document.getElementById("card-container");
 
 var cards = [
@@ -63,32 +62,75 @@ function printCards(cards) {
 
 shuffle(cards);
 
+$('.restart').on('click', function () {
+    restart();
+});
+
+$('.replay').on('click', function () {
+   restart();
+});
+
+function restart() {
+    click = 0;
+    attempts = 4;
+    moves = 0;
+    $('.moves').text("0");
+    $("#star-1").removeClass('fa-star-o');
+    $("#star-2").removeClass('fa-star-o');
+    $("#star-3").removeClass('fa-star-o');
+    $("#star-1").addClass('fa-star');
+    $("#star-2").addClass('fa-star');
+    $("#star-3").addClass('fa-star');
+    previousClicked = null;
+
+    reshuffle();
+}
+
+function reshuffle() {
+    cardContainer.innerHTML = "";
+    shuffle(cards);
+}
+
 var previousClicked;
 var click = 0;
 $('.card').on('click', function () {
+    //Click Functionality. It ensures only two cards open.
     ++click;
 
+    //To make sure it'll be resetted if no cards is matched.
+    if (points === 0 && clicked === 2) {
+        $('.card').removeClass('match');
+    }
+
+    //Opening the clicked card.
     $(this).addClass('match');
 
+    //Setting the previous clicked card
     if (click == 1) {
         previousClicked = $(this);
     }
 
     if (click == 2) {
+        //Reseting cards clicked
         click = 0;
+        //Setting the current clicked card
         var clicked = this;
+        //Setting the card object (bomb, leaf, e.t.c)
         var clickedObject = $(this).find('i').attr('class');
-
+        //Setting the previous clicked card object.
         var previousClickedObject = previousClicked.find('i').attr('class');
+        //Checking if clickedObject equals previousClickedObject. If true it'll be a match.
         if (clickedObject === previousClickedObject) {
             points++;
-            console.log("Match");
-        } else {
-            setTimeout(function () {
-                $(previousClicked).removeClass('match');
-                $(clicked).removeClass('match');
-            }, 1000);
 
+            if (points === 8) {
+
+            }
+        } else {
+            //Ensuring the cards will appear for a short while, afterwards disappear
+            closeCards(clicked);
+
+            //Removing one star after several attempts.
             if (moves === 4) {
                 removeStar();
             } else if (moves === 7) {
@@ -96,10 +138,18 @@ $('.card').on('click', function () {
             } else if (moves === 10) {
                 removeStar();
             }
+            //Update moves.
             updateMoves();
         }
     }
 });
+
+function closeCards(clicked) {
+    setTimeout(function () {
+        $(previousClicked).removeClass('match');
+        $(clicked).removeClass('match');
+    }, 1000);
+}
 
 function updateMoves() {
     moves++;
@@ -111,29 +161,3 @@ function removeStar() {
     $("#star-" + attempts).removeClass("fa-star");
     $("#star-" + attempts).addClass("fa-star-o");
 }
-
-function restart() {
-    click = 0;
-    previousClicked = null;
-
-    reshuffle();
-}
-
-function reshuffle() {
-    cardContainer.innerHTML = "";
-    shuffle(cards);
-}
-
-$('.restart').on('click', function () {
-    restart();
-})
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */

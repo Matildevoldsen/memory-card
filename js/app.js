@@ -1,7 +1,6 @@
-/*
- * Create a list that holds all of your cards
- */
-
+var points;
+var moves;
+var clicked = [];
 
 /*
  * Display the cards on the page
@@ -14,22 +13,22 @@
 const cardContainer = document.getElementById("card-container");
 
 var cards = [
-    '<li class="card"><i class="fa fa-diamond"></i></li>',
-    '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
-    '<li class="card"><i class="fa fa-anchor"></i></li>',
-    '<li class="card"><i class="fa fa-bolt"></i></li>',
-    '<li class="card"><i class="fa fa-cube"></i></li>',
-    '<li class="card"><i class="fa fa-bicycle"></i></li>',
-    '<li class="card"><i class="fa fa-leaf"></i></li>',
-    '<li class="card"><i class="fa fa-bomb"></i></li>',
-    '<li class="card"><i class="fa fa-diamond"></i></li>',
-    '<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
-    '<li class="card"><i class="fa fa-anchor"></i></li>',
-    '<li class="card"><i class="fa fa-bolt"></i></li>',
-    '<li class="card"><i class="fa fa-cube"></i></li>',
-    '<li class="card"><i class="fa fa-bicycle"></i></li>',
-    '<li class="card"><i class="fa fa-leaf"></i></li>',
-    '<li class="card"><i class="fa fa-bomb"></i></li>',
+    'fa-diamond',
+    'fa-paper-plane-o',
+    'fa-anchor',
+    'fa-bolt',
+    'fa fa-cube',
+    'fa-bicycle',
+    'fa-leaf',
+    'fa-bomb',
+    'fa-diamond',
+    'fa-paper-plane-o',
+    'fa-anchor',
+    'fa-bolt',
+    'fa fa-cube',
+    'fa-bicycle',
+    'fa-leaf',
+    'fa-bomb',
 ];
 
 function shuffle(array) {
@@ -50,11 +49,22 @@ function shuffle(array) {
 
 function printCards(cards) {
     for (card in cards) {
-        cardContainer.innerHTML = cardContainer.innerHTML + cards[card];
+        var cardEl = document.createElement("li");
+        cardEl.setAttribute('class', 'card');
+        cardEl.setAttribute('id', card);
+        cardPicture = document.createElement("i");
+        cardPicture.setAttribute('class', 'fa ' + cards[card]);
+
+        cardEl.appendChild(cardPicture);
+
+        cardContainer.appendChild(cardEl);
     }
+
+
 }
 
 shuffle(cards);
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

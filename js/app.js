@@ -65,6 +65,34 @@ function printCards(cards) {
 
 shuffle(cards);
 
+var previousClicked;
+var click = 0;
+$('.card').on('click', function () {
+    ++click;
+
+    $(this).addClass('match');
+
+    if (click == 1) {
+        previousClicked = $(this);
+
+    }
+
+    if (click == 2) {
+        click = 0;
+        var clicked = this;
+        var clickedObject = $(this).find('i').attr('class');
+
+        var previousClickedObject = previousClicked.find('i').attr('class');
+        if (clickedObject == previousClickedObject) {
+            alert('Match!!!!');
+        } else {
+            setTimeout(function () {
+                $(previousClicked).removeClass('match');
+                $(clicked).removeClass('match');
+            }, 1000);
+        }
+    }
+});
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

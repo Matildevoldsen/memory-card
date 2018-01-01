@@ -95,7 +95,7 @@ $(document).ready(function () {
         let cardEl = $("<li class='card' id='" + index + "'><i class='fa " + card + "' </li>");
         $('.deck').append(cardEl);
         index++;
-        $('.card').on('click', clickedCard);
+        $('.card').click(clickedCard);
     }
 
     function printCards(cards) {
@@ -159,7 +159,7 @@ $(document).ready(function () {
 
     let previousClicked;
     let click = 0;
-    $('.card').on('click', clickedCard);
+    $('.card').click(clickedCard);
 
     function clickedCard() {
         console.log(this);

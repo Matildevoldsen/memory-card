@@ -9,6 +9,7 @@ let minutes;
 
 let cardContainer = null;
 let isRestarted = false;
+let timer;
 
 var cards = [
     'fa-diamond',
@@ -130,7 +131,7 @@ $(document).ready(function () {
         $('#won').show();
         $('#won').css('display', 'flex');
         $('#won').css('display', '-webkit-flex');
-        $('#winner-text').text("Congrats! You won the game. It took you: " + minutes + "m " + seconds + "s. You got " + stars + " stars.");
+        $('#winner-text').text("Congrats! You won the game. It took you: " + timer.data('seconds') + "s. You got " + stars + " stars.");
 
     }
 
@@ -167,7 +168,7 @@ $(document).ready(function () {
         ++click;
 
         $('.timer').empty();
-        $('.timer').timer();
+        timer = $('.timer').timer();
 
         //To make sure it'll be resetted if no cards is matched.
         if (points === 0 && click === 2) {

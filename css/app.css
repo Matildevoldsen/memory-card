@@ -1,5 +1,6 @@
 html {
     box-sizing: border-box;
+    font-size: 62.5%;
 }
 
 *,
@@ -129,4 +130,17 @@ h1 {
 
 .hidden {
     display: none;
+}
+
+.replay {
+    padding: 15px 20px;
+    background-color: #fcfbfc;
+    transition: all 0.5s;
+    border-radius: 4px;
+    font-size: 2rem;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+.replay:hover {
+    box-shadow: 1px 1px 14px rgba(0, 0, 0, 0.5);
 }

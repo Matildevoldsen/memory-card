@@ -1,9 +1,8 @@
-var points = 0;
-var attempts = 4;
-var moves = 0;
-var stars = 3;
+let points = 0;
+let attempts = 4;
+let moves = 0;
+let stars = 3;
 
-var sec = 0;
 let seconds;
 let minutes;
 
@@ -127,7 +126,7 @@ $(document).ready(function () {
         restart();
     });
 
-    function won() {
+    function won(time) {
         $('#won').show();
         $('#won').css('display', 'flex');
         $('#won').css('display', '-webkit-flex');
@@ -167,7 +166,7 @@ $(document).ready(function () {
         //Click Functionality. It ensures only two cards open.
         ++click;
 
-        $('.timer').empty();
+       // $('.timer').empty();
         timer = $('.timer').timer();
 
 
@@ -205,8 +204,10 @@ $(document).ready(function () {
                 points++;
 
                 if (points === 8) {
-                    won();
+                    let time = $('.timer').html();
+                    won(time);
                     $('.timer').timer('pause');
+
                 }
                 if (points === 0) {
                     $('.card').removeClass('match');

@@ -170,22 +170,19 @@ $(document).ready(function () {
         $('.timer').empty();
         timer = $('.timer').timer();
 
-        //To make sure it'll be resetted if no cards is matched.
-        if (points === 0 && click === 2) {
-            $('.card').removeClass('match');
-        }
+
 
         //Opening the clicked card.
         $(this).addClass('match');
 
         //Setting the previous clicked card
-        if (click == 1) {
+        if (click === 1) {
             isRestarted = false;
             previousClicked = $(this);
         }
 
 
-        if (click == 2) {
+        if (click === 2) {
             //Reseting cards clicked
             click = 0;
             //Setting the current clicked card
@@ -201,15 +198,21 @@ $(document).ready(function () {
             }
 
             if (clickedObject === previousClickedObject && clicked.id !== previousClicked.prop("id")) {
+                console.log('match');
                 //Update moves.
                 updateMoves();
+
                 points++;
 
                 if (points === 8) {
                     won();
                     $('.timer').timer('pause');
                 }
-            } else if (clicked.id !== previousClicked.prop("id")) {
+                if (points === 0) {
+                    $('.card').removeClass('match');
+                }
+            } else if (clicked.id !== previousClicked.prop("id") || clickedObject !== previousClickedObject) {
+                console.log("Not a match");
                 //Update moves.
                 updateMoves();
                 //Ensuring the cards will appear for a short while, afterwards disappear
@@ -222,7 +225,7 @@ $(document).ready(function () {
                     removeStar();
                 }
             } else {
-
+                console.log('Double click');
                 //Ensuring the cards will appear for a short while, afterwards disappear
                 closeCards(clicked);
 
@@ -239,6 +242,7 @@ $(document).ready(function () {
     function restart() {
         $('.timer').timer('remove');
 
+        points = 0;
         click = 0;
         seconds = 0;
         minutes = 0;
@@ -251,16 +255,19 @@ $(document).ready(function () {
         attempts = 4;
         moves = 0;
         $('.moves').text("0");
-        $("#star-1").removeClass('fa-star-o');
-        $("#star-2").removeClass('fa-star-o');
-        $("#star-3").removeClass('fa-star-o');
-        $("#star-1").addClass('fa-star');
-        $("#star-2").addClass('fa-star');
-        $("#star-3").addClass('fa-star');
+        resetStars();
         previousClicked = null;
 
         cardContainer = null;
 
         redoShuffle(cards);
+
+    }
+
+    function resetStars() {
+        $('.stars').html("<li><i class=\"fa fa-star\" id=\"star-1\"></i></li>\n" +
+            "            <li><i class=\"fa fa-star\" id=\"star-2\"></i></li>\n" +
+            "            <li><i class=\"fa fa-star\" id=\"star-3\"></i></li>");
+
     }
 });

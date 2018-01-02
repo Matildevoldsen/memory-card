@@ -121,6 +121,10 @@ h1 {
     align-items: center;
 }
 
+.modal__content {
+    font-size: 1.5rem;
+}
+
 .modal {
     background-color: white;
     padding: 20px;
@@ -133,12 +137,12 @@ h1 {
 }
 
 .replay {
-    padding: 15px 20px;
+    padding: 1rem 2rem;
     background-color: #fcfbfc;
     transition: all 0.5s;
-    border-radius: 4px;
+    border-radius: 0.4rem;
     font-size: 2rem;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.4);
 }
 
 .replay:hover {
